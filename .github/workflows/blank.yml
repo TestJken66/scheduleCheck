@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
   schedule:
     #   分 时 日 月 周
-    - cron: "* * */3 * *"
+    - cron: "* * */3 * *" # 三天更新一次
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -25,12 +25,78 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      # Runs a set of commands using the runners shell
+      - name: sync UpdateTestApp
+        shell: bash
+        continue-on-error: true
+        run: |
+          git clone https://oauth2:${{ secrets.GTOKEN }}@github.com/TestJken66/UpdateTestApp.git
+          if [ $# == 0 ]; then
+            echo  "克隆成功......"
+            cd UpdateTestApp
+            chmod -R 777 *
+            git config core.filemode false
+            echo -e "* $(date "+%Y%m%d-%H%M%S")">>time.md
+
+            git config --global user.name "GithubAction"
+            git config --global user.email "sanbo.xyz@gmail.com"
+            if [ -z "$(git status --porcelain)" ]
+            then
+              echo "============================nothing to update.==============================="
+            else
+              git add .
+              git commit -am "GitHubAction: triggle by commit ${{ github.sha }}. created by ${{ github.workflow }}." -a
+              git push
+            fi
+          fi
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: sync check_sdk_scheduled
+        shell: bash
+        continue-on-error: true
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          git clone https://oauth2:${{ secrets.GTOKEN }}@github.com/TestJken66/check_sdk_scheduled.git
+          if [ $# == 0 ]; then
+            echo  "克隆成功......"
+            cd check_sdk_scheduled
+            chmod -R 777 *
+            git config core.filemode false
+            echo -e "* $(date "+%Y%m%d-%H%M%S")">>time.md
+
+            git config --global user.name "GithubAction"
+            git config --global user.email "sanbo.xyz@gmail.com"
+            if [ -z "$(git status --porcelain)" ]
+            then
+              echo "============================nothing to update.==============================="
+            else
+              git add .
+              git commit -am "GitHubAction: triggle by commit ${{ github.sha }}. created by ${{ github.workflow }}." -a
+              git push
+            fi
+          fi
+
+
+      # Runs a set of commands using the runners shell
+      - name: sync ActionsReport
+        shell: bash
+        continue-on-error: true
+        run: |
+          git clone https://oauth2:${{ secrets.GTOKEN }}@github.com/TestJken66/ActionsReport.git
+          if [ $# == 0 ]; then
+            echo  "克隆成功......"
+            cd ActionsReport
+            chmod -R 777 *
+            git config core.filemode false
+            echo -e "* $(date "+%Y%m%d-%H%M%S")">>time.md
+
+            git config --global user.name "GithubAction"
+            git config --global user.email "sanbo.xyz@gmail.com"
+            if [ -z "$(git status --porcelain)" ]
+            then
+              echo "============================nothing to update.==============================="
+            else
+              git add .
+              git commit -am "GitHubAction: triggle by commit ${{ github.sha }}. created by ${{ github.workflow }}." -a
+              git push
+            fi
+          fi
