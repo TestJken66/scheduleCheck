@@ -4,14 +4,14 @@ name: CI
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-  pull_request:
-    branches: [ main ]
+#   # Triggers the workflow on push or pull request events but only for the main branch
+#   push:
+#   pull_request:
+#     branches: [ main ]
   workflow_dispatch:
   schedule:
     #   分 时 日 月 周
-    - cron: "* * */3 * *" # 三天更新一次
+    - cron: "* * */1 * *" # 一天更新一次
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -45,7 +45,7 @@ jobs:
               echo "============================nothing to update.==============================="
             else
               git add .
-              git commit -am "GitHubAction: triggle by commit ${{ github.sha }}. created by ${{ github.workflow }}." -a
+              git commit -am "GitHubAction大哥: triggle by commit ${{ github.sha }}. created by ${{ github.workflow }}." -a
               git push
             fi
           fi
@@ -69,7 +69,7 @@ jobs:
               echo "============================nothing to update.==============================="
             else
               git add .
-              git commit -am "GitHubAction: triggle by commit ${{ github.sha }}. created by ${{ github.workflow }}." -a
+              git commit -am "GitHubAction大哥: triggle by commit ${{ github.sha }}. created by ${{ github.workflow }}." -a
               git push
             fi
           fi
@@ -94,7 +94,7 @@ jobs:
               echo "============================nothing to update.==============================="
             else
               git add .
-              git commit -am "GitHubAction: triggle by commit ${{ github.sha }}. created by ${{ github.workflow }}." -a
+              git commit -am "GitHubAction大哥: triggle by commit ${{ github.sha }}. created by ${{ github.workflow }}." -a
               git push
             fi
           fi
@@ -118,7 +118,7 @@ jobs:
               echo "============================nothing to update.==============================="
             else
               git add .
-              git commit -am "GitHubAction: triggle by commit ${{ github.sha }}. created by ${{ github.workflow }}." -a
+              git commit -am "GitHubAction大哥: triggle by commit ${{ github.sha }}. created by ${{ github.workflow }}." -a
               git push
             fi
           fi
@@ -144,7 +144,7 @@ jobs:
               echo "============================nothing to update.==============================="
             else
               git add .
-              git commit -am "GitHubAction: triggle by commit ${{ github.sha }}. created by ${{ github.workflow }}." -a
+              git commit -am "GitHubAction大哥: triggle by commit ${{ github.sha }}. created by ${{ github.workflow }}." -a
               git push
             fi
           fi
@@ -171,7 +171,7 @@ jobs:
               echo "============================nothing to update.==============================="
             else
               git add .
-              git commit -am "GitHubAction: triggle by commit ${{ github.sha }}. created by ${{ github.workflow }}." -a
+              git commit -am "GitHubAction大哥: triggle by commit ${{ github.sha }}. created by ${{ github.workflow }}." -a
               git push
             fi
           fi
@@ -196,7 +196,7 @@ jobs:
               echo "============================nothing to update.==============================="
             else
               git add .
-              git commit -am "GitHubAction: triggle by commit ${{ github.sha }}. created by ${{ github.workflow }}." -a
+              git commit -am "GitHubAction大哥: triggle by commit ${{ github.sha }}. created by ${{ github.workflow }}." -a
               git push
             fi
           fi
