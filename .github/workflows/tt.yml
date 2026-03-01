@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v3
 
       # Runs a set of commands using the runners shell
-      - name: sync UpdateTestApp
+      - name: sync temp
         shell: bash
         continue-on-error: true
         run: |
@@ -50,3 +50,27 @@ jobs:
             fi
           fi
 
+      # Runs a set of commands using the runners shell
+      - name: sync tmpx
+        shell: bash
+        continue-on-error: true
+        run: |
+          git clone https://oauth2:${{ secrets.GTOKEN }}@github.com/parserpp/tmpx.git
+          if [ $# == 0 ]; then
+            echo  "克隆成功......"
+            cd tmpx
+            chmod -R 777 *
+            git config core.filemode false
+            echo -e "* $(date "+%Y%m%d-%H%M%S")">>time.md
+
+            git config --global user.name "GithubAction"
+            git config --global user.email "admin@github.com"
+            if [ -z "$(git status --porcelain)" ]
+            then
+              echo "============================nothing to update.==============================="
+            else
+              git add .
+              git commit -am "GitHubAction: triggle by commit ${{ github.sha }}. created by ${{ github.workflow }}." -a
+              git push
+            fi
+          fi
